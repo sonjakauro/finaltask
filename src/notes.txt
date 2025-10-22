@@ -1,0 +1,24 @@
+Create list pages for customers and trainings. Create navigation for two list pages.
+
+List pages should contain following features:
+
+Sorting
+Searching (or Filtering)
+Training list should also show a customer name and format the date in the table, eg dd.mm.yyyy hh:mm
+Note! You can use for example Dayjs or Date-fns libraries for date formatting.
+
+
+    "id": 177,
+    "date": "2025-10-22T13:42:01.803+00:00",
+    "duration": 90,
+    "activity": "Gym training",
+    "customer": {
+      "id": 252,
+      "firstname": "Mary",
+      "lastname": "Philips",
+      "streetaddress": "Hill Street 3",
+      "postcode": "23322",
+      "city": "Flintsone",
+      "email": "m.philips@mail.com",
+      "phone": "232-310122"
+    }
