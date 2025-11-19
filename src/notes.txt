@@ -24,7 +24,7 @@ Note! You can use for example Dayjs or Date-fns libraries for date formatting.
     }
 
     task 2: 
-Add TEHTY & Edit customer
+TEHTY Add & Edit customer
 TEHTY Delete existing customer (Add also yes/no confirmation dialog)
 Add training to a customer. Use date picker component to enter the exercise date
 TEHTY Delete training (Add also yes/no confirmation dialog)
