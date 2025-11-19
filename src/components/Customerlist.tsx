@@ -4,6 +4,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { fetchCustomers, deleteCustomer } from "../api";
 import Button from "@mui/material/Button";
+import AddCustomer from "./AddCustomer";
+import EditCustomer from "./EditCustomer";
 
 //importin tyyli löytyy documentationista
 
@@ -29,6 +31,11 @@ function Customerlist() {
                 onClick={() => handelDelete(params.id as string)}>
                     Delete
                 </Button>
+        },
+        {field: "_links.customer.href",
+            headerName: "",
+            renderCell: (params: GridRenderCellParams) => 
+                <EditCustomer getCustomers={getCustomers} CustomerRow={params.row}/> 
         }
     ]
 
@@ -52,6 +59,7 @@ function Customerlist() {
 
     return (
         <>
+        <AddCustomer getCustomers={getCustomers} />
             <div style={{ width: '100%', height: 500 }}>
                 <DataGrid
                     rows={customers}
