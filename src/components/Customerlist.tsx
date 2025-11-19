@@ -24,25 +24,22 @@ function Customerlist() {
         { field: "phone", headerName: "Phone number", width: 150 },
         {
             field: "_links.self.href",
+            width: 300,
             headerName: "Actions",
             renderCell: (params: GridRenderCellParams) =>
+                <>
                 <Button 
                 color="error" 
                 size="small" 
                 onClick={() => handelDelete(params.id as string)}>
                     Delete
                 </Button>
+                <EditCustomer getCustomers={getCustomers} CustomerRow={params.row}/> 
+                <AddTraining CustomerRow={params.row}/> 
+                </>
         },
-        {field: "_links.customer.href",
-            headerName: "EDIT",
-            renderCell: (params: GridRenderCellParams) => 
-                <EditCustomer getCustomers={getCustomers} CustomerRow={params.row}/> 
-        }
-        {field: "_links.customer.href",
-            headerName: "ADD training",
-            renderCell: (params: GridRenderCellParams) => 
-                <EditCustomer getCustomers={getCustomers} CustomerRow={params.row}/> 
-        }
+        
+        
     ]
 
     useEffect(() => {

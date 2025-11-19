@@ -5,87 +5,91 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import type { TrainingForm } from '../types';
+import type { AddTrainingForm, Customer } from '../types';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 type AddTrainingProps = {
-    getTrainings: () => void;
+    CustomerRow: Customer;
 }
 
-export default function AddTraining({ getTrainings }: AddTrainingProps) {
-  const [open, setOpen] = useState(false);
+export default function AddTraining({ CustomerRow }: AddTrainingProps) {
+    const [open, setOpen] = useState(false);
 
-  const [Training, setTraining] = useState<TrainingForm>({
-    date: "",
-    duration: 0,
-    activity: "",
-    customer: "https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/customers/{id}"
-    
-})
+    const [Training, setTraining] = useState<AddTrainingForm>({
+        date: null,
+        duration: 0,
+        activity: "",
+        customer: CustomerRow._links.self.href
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSave = () => {
-    fetch("https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings", {
-        method: "POST", 
-        headers: { "content-type" : "application/json" },
-        body: JSON.stringify(Training),
     })
-    .then(response => {
-        if (!response.ok)
-            throw new Error("Error when adding training")
-        return response.json();
-    })
-    .then(() => {
-        getCustomers();
-        handleClose();
-    })
-    .catch(err => console.error(err))
-  }
 
-  return (
-    <>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add a new training to a customer</DialogTitle>
-        <DialogContent>
-            <TextField
-            value={Training.date}
-            onChange={event => setTraining({ ...Training, date: event.target.value})}
-              margin="dense"
-              label="Date"
-              fullWidth
-              variant="standard"
-            />
-                       <TextField
-            value={Training.duration}
-            onChange={event => setTraining({ ...Training, duration: Number(event.target.value)})}
-              margin="dense"
-              label="Last name"
-              fullWidth
-              variant="standard"
-            />
-                       <TextField
-            value={Training.activity}
-            onChange={event => setTraining({ ...Training, activity: event.target.value})}
-              margin="dense"
-              label="Street address"
-              fullWidth
-              variant="standard"
-            />
-            
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick = {handleSave}>
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
-  );
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleSave = () => {
+        fetch("https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(Training),
+        })
+            .then(response => {
+                if (!response.ok)
+                    throw new Error("Error when adding training")
+                return response.json();
+            })
+            .then(() => {
+                handleClose();
+            })
+            .catch(err => console.error(err))
+    }
+
+    return (
+        <>
+        <Button size="small" onClick={handleClickOpen}>
+                Add training
+            </Button>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Add a new training to a customer</DialogTitle>
+                <DialogContent>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                        value={Training.date}
+                        onChange={value => setTraining({ ...Training, date: value })}
+                        label="Date and time"
+                    />
+                    </LocalizationProvider>
+                    <TextField
+                        value={Training.duration}
+                        onChange={event => setTraining({ ...Training, duration: Number(event.target.value) })}
+                        margin="dense"
+                        label="Duration"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        value={Training.activity}
+                        onChange={event => setTraining({ ...Training, activity: event.target.value })}
+                        margin="dense"
+                        label="Activity"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleSave}>
+                        Save
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    );
 }
