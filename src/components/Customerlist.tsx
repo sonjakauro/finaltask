@@ -8,18 +8,15 @@ import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import AddTraining from "./AddTraining";
 
-//importin tyyli löytyy documentationista
-
-
 function Customerlist() {
     const [customers, setCustomers] = useState<Customer[]>([]);
 
     const columns: GridColDef[] = [
-        { field: "firstname", headerName: "First name", width: 150 },
-        { field: "lastname", headerName: "Last name", width: 150 },
+        { field: "firstname", headerName: "First name", width: 125 },
+        { field: "lastname", headerName: "Last name", width: 125 },
         { field: "streetaddress", headerName: "Address", width: 150 },
-        { field: "postcode", headerName: "Postal code", width: 150 },
-        { field: "city", headerName: "City", width: 150 },
+        { field: "postcode", headerName: "Postal code", width: 100 },
+        { field: "city", headerName: "City", width: 100 },
         { field: "email", headerName: "Email address", width: 150 },
         { field: "phone", headerName: "Phone number", width: 150 },
         {

@@ -37,7 +37,7 @@ export default function AddCustomer({ getCustomers }: AddCustomerProps) {
         method: "POST", 
         headers: { "content-type" : "application/json" },
         body: JSON.stringify(Customer),
-    }) //siirretään API-välilehdelle
+    })
     .then(response => {
         if (!response.ok)
             throw new Error("Error when adding Customer")
@@ -52,7 +52,7 @@ export default function AddCustomer({ getCustomers }: AddCustomerProps) {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button color="success" onClick={handleClickOpen}>
         ADD Customer
       </Button>
       <Dialog open={open} onClose={handleClose}>

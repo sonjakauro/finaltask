@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import { Link, Outlet } from 'react-router';
+import { Button } from "@mui/material"
 
 function App() {
   return (
@@ -14,9 +15,15 @@ function App() {
       </Toolbar>
     </AppBar>
       <nav>
+        <Button variant="outlined">
         <Link to={"/"}>Customers</Link>
+        </Button>
+        <Button variant="outlined">
         <Link to={"/trainings"}>Trainings</Link>
+        </Button>
       </nav>
+
+      
       <Outlet />
     <CssBaseline/>
     </Container>

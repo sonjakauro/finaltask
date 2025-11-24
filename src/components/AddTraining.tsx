@@ -52,7 +52,7 @@ export default function AddTraining({ CustomerRow }: AddTrainingProps) {
 
     return (
         <>
-        <Button size="small" onClick={handleClickOpen}>
+        <Button size="small" color="success" onClick={handleClickOpen}>
                 Add training
             </Button>
             <Dialog open={open} onClose={handleClose}>
